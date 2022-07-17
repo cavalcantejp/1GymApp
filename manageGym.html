@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Manage Gym | 1GymApp</title>
+    <link rel="stylesheet" type="text/css" href="css/manageGym.css" />
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <!--<Might not need this tag, aside></aside>-->
+        <article>
+            <!--Background image and log in fields on top-->
+            <form name="formGym" id="formGym" action="" onsubmit="">
+                <div class="div-gym">
+                    <div><label for="name">Name</label></div>
+                    <div><input type="text" name="name" id="name"/></div>
+                </div>
+                <div class="div-gym">
+                    <div><label for="capacity">Capacity</label></div>
+                    <div><input type="number" name="capacity" id="capacity"/></div>
+                </div>
+                <div class="div-gym">
+                    <div><label for="latitude">Latitude</label></div>
+                    <div><input type="text" name="latitude" id="latitude"/></div>
+                </div>
+                <div class="div-gym">
+                    <div><label for="longitude">Longitude</label></div>
+                    <div><input type="text" name="longitude" id="longitude"/></div>
+                </div>
+                <input type="reset" value="Reset"/>
+                <input type="submit" class="indexButton" value="Add Gym"/>
+            </form>
+            <div id="list-gyms"></div>
+        </article>
+
+        <!--The div element for the map -->
+        <div id="map"></div>
+    </main>
+    <footer>
+        <p id="copyright">Copyright &copy; of JP Inc </p>
+    </footer>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg" defer></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="javaScript/server.js"></script>
+<script src="javaScript/manageGym.js"></script>
+</body>
+</html>

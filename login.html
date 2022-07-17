@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Log in | 1GymApp</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><button class="indexButton" onclick="location.href='findGym.html'">Buy Now</button></li>
+                <li><button class="indexButton" onclick="location.href='index.html'">Home</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!--<Might not need this tag, aside></aside>-->
+        <article>
+            <!--Background image and log in fields on top-->
+            <form name="formLogin" id="formLogin" action="" onsubmit="">
+                <div class="div-login">
+                    <div><label for="username">Username</label></div>
+                    <div><input type="text" name="username" id="username"/></div>
+                </div>
+                <div class="div-login">
+                    <div><label for="password">Password</label></div>
+                    <div><input type="password" name="password" id="password"/></div>
+                </div>
+                <input type="reset" value="Reset"/>
+                <input type="submit" class="indexButton" value="Log in"/>
+            </form>
+            <br>
+            <hr>
+            <br>
+            <form name="formSignUp" id="formSignUp" action="" onsubmit="">
+                <div class="div-signup">
+                    <div><label for="usernameSignup">Username</label></div>
+                    <div><input type="text" name="usernameSignup" id="usernameSignup"/></div>
+                </div>
+                <div class="div-signup">
+                    <div><label for="passwordSignup">Password</label></div>
+                    <div><input type="password" name="passwordSignup" id="passwordSignup"/></div>
+                </div>
+                <input type="reset" value="Reset"/>
+                <input type="submit" class="indexButton" value="Create user"/>
+            </form>
+            <br>
+            <hr>
+            <br>
+            <br>
+            <div><label for="continue">Continue as guest</label></div>
+            <input type="submit" class="indexButton" name="continue" value="Continue" onclick=""/>
+        </article>
+    </main>
+    <footer>
+        <p id="copyright">Copyright &copy; of JP Inc </p>
+    </footer>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="javaScript/server.js"></script>
+<script src="javaScript/login.js"></script>
+</body>
+</html>
