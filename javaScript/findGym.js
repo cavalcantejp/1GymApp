@@ -15,7 +15,7 @@ function listGyms()
             gyms = gyms + ", " + childData.name;
 
             //had to use parse to accept the number
-            coordinates.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude) });
+            coordinates.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude)});
         });
         //saves the elements in the variable
         document.getElementById("list-gyms").innerHTML = gyms;
@@ -41,4 +41,22 @@ function initMap(coordinates)
             map: map,
         });
     });
+}
+
+//enter location
+const input = document.getElementById("pac-input");
+const searchBox = new google.maps.places.SearchBox(input);
+
+searchBox.addListener("places_changed", () => 
+{
+  const places = searchBox.getPlaces();
+  if (places.length == 0) 
+  {
+    return;
+  }
+  moveToLocation(places[0].geometry.location);
+});
+
+function moveToLocation(center){
+  window.map.panTo(center);
 }
