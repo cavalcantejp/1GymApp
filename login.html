@@ -13,12 +13,12 @@
         </nav>
     </header>
     <main>
-        <!--<Might not need this tag, aside></aside>-->
         <article>
             <!--Background image and log in fields on top-->
+            <!--Log in form-->
             <form name="formLogin" id="formLogin" action="" onsubmit="">
                 <div class="div-login">
-                    <div><label for="username">Username</label></div>
+                    <div><label for="username">Username - email</label></div>
                     <div><input type="text" name="username" id="username"/></div>
                 </div>
                 <div class="div-login">
@@ -31,6 +31,7 @@
             <br>
             <hr>
             <br>
+            <!--Sign up form-->
             <form name="formSignUp" id="formSignUp" action="" onsubmit="">
                 <div class="div-signup">
                     <div><label for="usernameSignup">Username</label></div>
@@ -46,7 +47,6 @@
             <br>
             <hr>
             <br>
-            <br>
             <div><label for="continue">Continue as guest</label></div>
             <input type="submit" class="indexButton" name="continue" value="Continue" onclick=""/>
         </article>
@@ -54,10 +54,11 @@
     <footer>
         <p id="copyright">Copyright &copy; of JP Inc </p>
     </footer>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="javaScript/server.js"></script>
-<script src="javaScript/login.js"></script>
+    <!--Database and JavaScript link -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="javaScript/server.js"></script>
+    <script src="javaScript/login.js"></script>
 </body>
 </html>
