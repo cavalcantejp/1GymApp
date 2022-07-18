@@ -18,7 +18,7 @@ function listGyms()
             coordinates.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude)});
         });
         //saves the elements in the variable
-        document.getElementById("list-gyms").innerHTML = gyms;
+       // document.getElementById("list-gyms").innerHTML = gyms;
 
         initMap(coordinates);
     });
@@ -54,9 +54,7 @@ searchBox.addListener("places_changed", () =>
   {
     return;
   }
-  moveToLocation(places[0].geometry.location);
+  map.panTo(places[0].geometry.location);
 });
 
-function moveToLocation(center){
-  window.map.panTo(center);
-}
+listGyms()
