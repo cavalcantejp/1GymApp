@@ -6,6 +6,7 @@ document.getElementById('formGym').addEventListener('submit',(e) =>
 {
     e.preventDefault();
 
+    //use the push function to add a new gym into the database, set holds the values, like an object
     var gymInfo = dbGyms.push();
     gymInfo.set({
         name: document.getElementById('name').value,
@@ -18,29 +19,39 @@ document.getElementById('formGym').addEventListener('submit',(e) =>
 function listGyms()
 {
     // just an example on how to list things from real time database
-    dbGyms.on("value", function(snapshot) {
+    dbGyms.on("value", function(snapshot) 
+    {
         var gyms = "";
-        var coordinations = [];
-        snapshot.forEach(function(childSnapshot) {
+        var coordinates = [];
+        snapshot.forEach(function(childSnapshot) 
+        {
             var childData = childSnapshot.val();
             gyms = gyms + ", " + childData.name;
+
+            //had to use parse to accept the number
             coordinations.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude) });
         });
+        //saves the elements in the variable
         document.getElementById("list-gyms").innerHTML = gyms;
-        initMap(coordinations);
+
+        initMap(coordinates);
     });
 }
 
-function initMap(coordinations) {
-    
-    const map = new google.maps.Map(document.getElementById("map"), {
+//function to show the geolocation map
+function initMap(coordinates) 
+{
+    const map = new google.maps.Map(document.getElementById("map"), 
+    {
         zoom: 14,
-        center: coordinations[0],
+        center: coordinates[0],
     });
 
-    coordinations.forEach(coordination => {
+    //for each to add the pins to the map
+    coordinates.forEach(coordinate => 
+    {
         new google.maps.Marker({
-            position: coordination,
+            position: coordinate,
             map: map,
         });
     });
