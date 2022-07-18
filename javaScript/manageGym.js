@@ -29,7 +29,7 @@ function listGyms()
             gyms = gyms + ", " + childData.name;
 
             //had to use parse to accept the number
-            coordinations.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude) });
+            coordinates.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude) });
         });
         //saves the elements in the variable
         document.getElementById("list-gyms").innerHTML = gyms;
