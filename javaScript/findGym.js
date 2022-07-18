@@ -41,20 +41,20 @@ function initMap(coordinates)
             map: map,
         });
     });
+
+    //enter location
+    const input = document.getElementById("pac-input");
+    const searchBox = new google.maps.places.SearchBox(input);
+
+    searchBox.addListener("places_changed", () => 
+    {
+        const places = searchBox.getPlaces();
+        if (places.length == 0) 
+    {
+        return;
+    }
+        map.panTo(places[0].geometry.location);
+    });
 }
-
-//enter location
-const input = document.getElementById("pac-input");
-const searchBox = new google.maps.places.SearchBox(input);
-
-searchBox.addListener("places_changed", () => 
-{
-  const places = searchBox.getPlaces();
-  if (places.length == 0) 
-  {
-    return;
-  }
-  map.panTo(places[0].geometry.location);
-});
 
 listGyms()
