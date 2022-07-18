@@ -13,14 +13,27 @@
         </nav>
     </header>
     <main>
-        <!--<Might not need this tag, aside></aside>-->
         <article>
-            <!--Insert geolocation and drop down button-->
+            <form name="formBuy" id="formBuy" action="" onsubmit="">
+                <div class="div-buy">
+                    <div><label for="pac-input">Enter Location</label></div>
+                    <input id="pac-input" name="pac-input" type="text" placeholder="Street, Town, or Postcode" size="50">
+                </div>
+            </form>
         </article>
+
+        <!--The div element for the map -->
+        <div id="map"></div>
     </main>
     <footer>
         <p id="copyright">Copyright &copy; of JP Inc </p>
     </footer>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="javaScript/server.js"></script>
+    <script src="javaScript/findGym.js"></script>
 </body>
 </html>
 
