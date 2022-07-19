@@ -1,7 +1,7 @@
 var db = firebase.database();
 var dbGyms = db.ref('gyms');
 
-function listGyms()
+function listGymsforDropdown()
 {
     // just an example on how to list things from real time database
     // gonna be used on the dropdown button
@@ -18,8 +18,8 @@ function listGyms()
             coordinates.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude)});
         });
         //saves the elements in the variable
-       // document.getElementById("list-gyms").innerHTML = gyms;
-
+        //TODO search how to link the listed gyms to the dropdown button
+        document.getElementById("drop-gym").innerHTML = gyms;
         initMap(coordinates);
     });
 }
@@ -57,4 +57,4 @@ function initMap(coordinates)
     });
 }
 
-listGyms()
+listGymsforDropdown()
