@@ -9,6 +9,8 @@ function listGymsforDropdown()
     {
         var gyms = "";
         var coordinates = [];
+        var dropgym = document.getElementById("drop-gym");
+
         snapshot.forEach(function(childSnapshot) 
         {
             var childData = childSnapshot.val();
@@ -16,13 +18,14 @@ function listGymsforDropdown()
 
             //had to use parse to accept the number
             coordinates.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude)});
+
+            dropgym.options[dropgym.options.length] = new Option(childData.name, childData.name);
         });
-        //saves the elements in the variable
-        //TODO search how to link the listed gyms to the dropdown button
-        document.getElementById("drop-gym").innerHTML = gyms;
+
         initMap(coordinates);
     });
 }
+
 
 //function to show the geolocation map
 function initMap(coordinates) 
