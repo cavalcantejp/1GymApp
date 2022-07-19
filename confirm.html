@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Confirm the Gym and date | 1GymApp</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><button class="indexButton" onclick="location.href='index.html'">Home</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <aside>Insert gym info here</aside>
+        <article>
+            <form name="formConfirm" id="formConfirm" action="" onsubmit="">
+                <div class="div-confirm">
+                    <div><label for="date">Select date</label></div>
+                    <div><input type="date" name="date" id= "date" onchange=""/></div>
+                </div>
+                <div>
+                    <div><label for="quantity">Select quantity</label></div>
+                    <select name="quantity" id="quantity"></select>
+                    <option value="1">1</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </div>
+            </form>
+        </article>
+    </main>
+    <footer>
+        <p id="copyright">Copyright &copy; of JP Inc </p>
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="javaScript/server.js"></script>
+    <script src="javaScript/confirm.js"></script>
+</body>
+</html>
+
