@@ -15,11 +15,29 @@ function listGymsforDropdown()
         {
             var childData = childSnapshot.val();
             gyms = gyms + ", " + childData.name;
+            sessionStorage.setItem('capacity',childData.capacity);
 
             //had to use parse to accept the number
             coordinates.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude)});
 
             dropgym.options[dropgym.options.length] = new Option(childData.name, childData.name);
+        });
+
+        //event listener to change the capacity
+        dropgym.addEventListener('change', function()
+        {
+            dbGyms.on("value", function(snapshot)
+            {
+                snapshot.forEach(function(childSnapshot)
+                {
+                    var childData = childSnapshot.val();
+
+                    if(childData.name == dropgym.value)
+                    {
+                        sessionStorage.setItem('capacity', childData.capacity);
+                    }
+                });
+            });
         });
 
         initMap(coordinates);
@@ -58,6 +76,14 @@ function initMap(coordinates)
     }
         map.panTo(places[0].geometry.location);
     });
+}
+
+function nextClick()
+{
+    var dropgym = document.getElementById("drop-gym");
+    sessionStorage.setItem('selectedGym', dropgym.value);
+
+    location.href = 'confirm.html'
 }
 
 listGymsforDropdown()

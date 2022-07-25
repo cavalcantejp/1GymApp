@@ -15,3 +15,7 @@ function validateDate(date)
 
 	return true;
 }
+
+let data = sessionStorage.getItem('selectedGym');
+document.getElementById("gyminfo").innerHTML = data;
+document.getElementById("gyminfo").innerHTML += 'Capacity' + sessionStorage.getItem('capacity');
