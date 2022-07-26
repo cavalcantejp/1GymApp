@@ -51,7 +51,7 @@ auth.onAuthStateChanged((user) => {
                 var childData = childSnapshot.val();
 
 
-                document.getElementById('gymname').innerHTML += childData.gym;
+                document.getElementById('gymname').innerHTML = "Gym: " + childData.gym;
                 gymname = childData.gym;
             });
         });
