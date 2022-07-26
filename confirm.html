@@ -54,6 +54,18 @@
               }]
             });
           },
+          
+          onClick: (e) =>
+          {
+            var capacity = sessionStorage.getItem('capacity');
+           
+            if (capacity <= document.getElementById('quantity').value)
+            {
+                event.preventDefault();
+            }
+            //TODO validation here for date field & capacity
+          },
+
           // Finalize the transaction after payer approval
           onApprove: (data, actions) => 
           {

@@ -17,6 +17,7 @@ auth.onAuthStateChanged((user) => {
 	}
 });
 
+//to prevent buying before
 function validateDate(date) {
 	if (date == "" || date == null) {
 		alert('Please fill in the date');
