@@ -1,12 +1,33 @@
 var db = firebase.database();
 var dbGyms = db.ref('gyms');
+var admin = "";
+
+const auth = firebase.auth();
+
+const user = auth.currentUser;
+var uid = "";
+
+auth.onAuthStateChanged((user) => {
+	if (user) {
+		// User is signed in, see docs for a list of available properties
+		// https://firebase.google.com/docs/reference/js/firebase.User
+		uid = user;
+	}
+	else {
+		// TODOUser is signed out
+	}
+});
 
 // create gym
 document.getElementById('formGym').addEventListener('submit',(e) => 
 {
-    e.preventDefault();
-
-    //use the push function to add a new gym into the database, set holds the values, like an object
+    if(uid.uid != admin)
+    {
+        alert("You are not an admin");
+    }
+    else
+    {
+        //use the push function to add a new gym into the database, set holds the values, like an object
     var gymInfo = dbGyms.push();
     gymInfo.set({
         name: document.getElementById('name').value,
@@ -14,6 +35,10 @@ document.getElementById('formGym').addEventListener('submit',(e) =>
         latitude: document.getElementById('latitude').value,
         longitude: document.getElementById('longitude').value
     });
+    }
+
+    e.preventDefault();
+
 });
 
 function listGyms()
@@ -58,4 +83,10 @@ function initMap(coordinates)
 }
 
 listGyms();
-//window.initMap = initMap;
+
+var usersRef = firebase.database().ref('Admin/');
+
+usersRef.on("value", function (snapshot) 
+{
+    admin = snapshot.val();
+});
