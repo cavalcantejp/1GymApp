@@ -39,6 +39,12 @@ let data = sessionStorage.getItem('selectedGym');
 document.getElementById("gyminfo").innerHTML = data;
 document.getElementById("gyminfo").innerHTML += 'Capacity' + sessionStorage.getItem('capacity');
 
+document.getElementById("price").value = (12 * 1);
+document.getElementById("quantity").addEventListener("click", function(e)
+{
+	document.getElementById("price").value = (12 * document.getElementById("quantity").value);
+})
+
 //linking user to the gym 
 function linkUserToGym() 
 {
