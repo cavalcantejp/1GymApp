@@ -4,3 +4,12 @@
     width: 100%;
     /* The width is the width of the web page */
 }
+
+.rating {
+    width: 180px;
+ }
+ 
+ .rating__star {
+    cursor: pointer;
+    color: #dabd18b2;
+ }

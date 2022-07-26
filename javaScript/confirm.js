@@ -40,23 +40,18 @@ document.getElementById("gyminfo").innerHTML = data;
 document.getElementById("gyminfo").innerHTML += 'Capacity' + sessionStorage.getItem('capacity');
 
 document.getElementById("price").value = (12 * 1);
-document.getElementById("quantity").addEventListener("click", function(e)
-{
+document.getElementById("quantity").addEventListener("click", function (e) {
 	document.getElementById("price").value = (12 * document.getElementById("quantity").value);
 })
 
 //linking user to the gym 
-function linkUserToGym() 
-{
-	dbGyms.on("value", function (snapshot) 
-	{
+function linkUserToGym() {
+	dbGyms.on("value", function (snapshot) {
 
-		snapshot.forEach(function (childSnapshot) 
-		{
+		snapshot.forEach(function (childSnapshot) {
 			var childData = childSnapshot.val();
 
-			if (sessionStorage.getItem('selectedGym') == childData.name) 
-			{
+			if (sessionStorage.getItem('selectedGym') == childData.name) {
 				var g = sessionStorage.getItem('selectedGym');
 
 				firebase.database().ref('users/' + uid.uid).set({
