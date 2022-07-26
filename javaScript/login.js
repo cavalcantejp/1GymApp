@@ -13,11 +13,12 @@ document.getElementById('formLogin').addEventListener('submit',(e) =>
     {
         const user = userCredential.user;
         alert("User successfully logged in.");
+        location.href = 'rating.html' 
     }).catch((error) => 
     {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error);
+        alert(errorMessage);
     });
 });
 
@@ -37,6 +38,6 @@ document.getElementById('formSignUp').addEventListener('submit',(e) =>
     {
         var errorcode = error.code;
         var errormsg = error.msg;
-        console.log(error);
+        alert(errormsg);
     });
 });
