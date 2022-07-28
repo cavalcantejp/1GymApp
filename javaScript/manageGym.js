@@ -90,3 +90,9 @@ usersRef.on("value", function (snapshot)
 {
     admin = snapshot.val();
 });
+
+document.getElementById('logout').addEventListener("click", function(e)
+{
+    firebase.auth().signOut();
+    location.href = 'login.html';
+})

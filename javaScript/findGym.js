@@ -157,3 +157,9 @@ function addRatings(gym) {
         });
     });
 }
+
+document.getElementById('logout').addEventListener("click", function(e)
+{
+    firebase.auth().signOut();
+    location.href = 'login.html';
+})
