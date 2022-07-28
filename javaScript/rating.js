@@ -50,15 +50,25 @@ auth.onAuthStateChanged((user) => {
             snapshot.forEach(function (childSnapshot) {
                 var childData = childSnapshot.val();
 
-
-                document.getElementById('gymname').innerHTML = "Gym: " + childData.gym;
+                //document.getElementById('gymname').innerHTML = "Gym: " + childData.gym;
                 gymname = childData.gym;
             });
         });
 
+        var purchases = firebase.database().ref('purchases/');
 
-
-
+        var dropgym = document.getElementById("drop-gym");
+        purchases.once("value", function(snapshot) 
+        {
+            snapshot.forEach(function (childSnapshot)
+            {
+                var childData = childSnapshot.val();
+                if (childData.user == uid)
+                {
+                    dropgym.options[dropgym.options.length] = new Option(childData.gym, childData.gym);
+                }
+            });
+        });
 
     } else {
         // User is signed out
@@ -71,10 +81,11 @@ document.getElementById("commentbutton").addEventListener("click", function () {
 
     var name = document.getElementById('name').value;
     var comment = document.getElementById('comment').value;
+    var comment = document.getElementById("drop-gym");
 
 
     firebase.database().ref('ratings/' + Date.now()).set({
-        gym: gymname,
+        gym: dropgym.value,
         name: name,
         comment: comment,
         rating: rating
