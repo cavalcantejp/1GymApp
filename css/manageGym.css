@@ -13,3 +13,63 @@
     cursor: pointer;
     color: #dabd18b2;
  }
+
+ main, footer{
+    margin: 0 15px;
+ }
+
+ main > div.main-banner, main > div.main-title{
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+ }
+
+ .logo-1gymapp {
+    font-family: fantasy;
+    color: #df0e0e !important;
+}
+
+#login-button, #login-button{
+    display: none;
+}
+
+.indexButton, .indexButton:hover, .indexButton:active{
+    color: white;
+    background-color: #df0e0e !important;
+    border: 0;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+.resetButton{
+    color: white;
+    background-color: #404040 !important;
+    border: 0;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 50px;
+}
+
+#formLogin, #formSignUp{
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#divContinueAsGuest{
+    margin-top: 20px;
+}
+
+.div-user-action{
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+}

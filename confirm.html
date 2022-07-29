@@ -21,15 +21,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                            <a class="nav-link active logo-1gymapp" aria-current="page" href="index.html">1GymApp</a>
                         </li>
                     </ul>
-                </ul>
-                <ul class="navbar-nav me-2">
-                    <li class="nav-item">
-                        <a class="nav-link" id="logout" href="login.html">Logout</a>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav me-2">
+                        <li class="nav-item">
+                            <a id="login-button" class="nav-link" href="login.html">Login</a>
+                            <a id="logout-button" class="nav-link" id="logout">Logout</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
     </header>
@@ -60,52 +60,15 @@
     <footer>
         <p id="copyright">Copyright &copy; of JP Inc </p>
     </footer>
+
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="javaScript/server.js"></script>
+    <script src="javaScript/userManager.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=Aeh5DFX4OTtt1nigq-axrjq9cWKviTcey0z_3hFhoElBwmpAABGhndOnkfvfuRmeO7Xp1c4VyE10TJSe&currency=EUR"></script>
     <script src="javaScript/confirm.js"></script>
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=Aeh5DFX4OTtt1nigq-axrjq9cWKviTcey0z_3hFhoElBwmpAABGhndOnkfvfuRmeO7Xp1c4VyE10TJSe&currency=EUR"></script>
-    <script>
-        paypal.Buttons({
-            // Sets up the transaction when a payment button is clicked
-            createOrder: (data, actions) => {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: document.getElementById("price").value
-                        }
-                    }]
-                });
-            },
-
-            onClick: (e) => {
-                var capacity = sessionStorage.getItem('capacity');
-
-                if (capacity <= document.getElementById('quantity').value) {
-                    event.preventDefault();
-                }
-                //TODO validation here for date field & capacity
-            },
-
-            // Finalize the transaction after payer approval
-            onApprove: (data, actions) => {
-                return actions.order.capture().then(function (orderData) {
-                    // Successful capture! For dev/demo purposes:
-                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                    const transaction = orderData.purchase_units[0].payments.captures[0];
-                    alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-                    // When ready to go live, remove the alert and show a success message within this page. For example:
-                    // const element = document.getElementById('paypal-button-container');
-                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                    // Or go to another URL:  actions.redirect('thank_you.html');
-                    linkUserToGym();
-                    //TODO reduce capacity
-                });
-            }
-        }).render('#paypal-button-container');
-    </script>
+    
 </body>
 
 </html>

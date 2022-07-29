@@ -28,13 +28,13 @@ document.getElementById('formGym').addEventListener('submit',(e) =>
     else
     {
         //use the push function to add a new gym into the database, set holds the values, like an object
-    var gymInfo = dbGyms.push();
-    gymInfo.set({
-        name: document.getElementById('name').value,
-        capacity: document.getElementById('capacity').value,
-        latitude: document.getElementById('latitude').value,
-        longitude: document.getElementById('longitude').value
-    });
+        var gymInfo = dbGyms.push();
+        gymInfo.set({
+            name: document.getElementById('name').value,
+            capacity: document.getElementById('capacity').value,
+            latitude: document.getElementById('latitude').value,
+            longitude: document.getElementById('longitude').value
+        });
     }
 
     e.preventDefault();
@@ -90,9 +90,3 @@ usersRef.on("value", function (snapshot)
 {
     admin = snapshot.val();
 });
-
-document.getElementById('logout').addEventListener("click", function(e)
-{
-    firebase.auth().signOut();
-    location.href = 'login.html';
-})

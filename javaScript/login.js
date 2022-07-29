@@ -41,9 +41,3 @@ document.getElementById('formSignUp').addEventListener('submit',(e) =>
         alert(errormsg);
     });
 });
-
-document.getElementById('logout').addEventListener("click", function(e)
-{
-    firebase.auth().signOut();
-    location.href = 'login.html';
-})
