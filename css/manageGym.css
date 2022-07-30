@@ -73,3 +73,20 @@
     padding: 10px;
     border-radius: 10px;
 }
+
+#nextButton, #nextButton:hover{
+    color: white;
+    background-color: #df0e0e !important;
+    border: 0;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+#nextButton:disabled{
+    color: #666666;
+    background-color: #404040;
+    /*TODO change color of the button when disabled*/
+    
+}

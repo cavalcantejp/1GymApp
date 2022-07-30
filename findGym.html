@@ -46,12 +46,14 @@
                         size="50">
                 </div>
                 <div>
-                    <div><label for="drop-gym">Select a gym</label></div>
-                    <select name="drop-gym" id="drop-gym"></select>
+                    <br/>
+                    <select name="drop-gym" id="drop-gym">
+                        <option value="default">Select a gym</option>
+                    </select>
                 </div>
             </form>
             <div>
-                <button class="indexButton" onclick="nextClick()">Next</button>
+                <button class="indexButton" id="nextButton" onclick="nextClick()" disabled>Next</button>
             </div>
         </article>
         <!--The div element for the map -->

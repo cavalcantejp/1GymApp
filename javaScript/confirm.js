@@ -6,6 +6,15 @@ const auth = firebase.auth();
 const user = auth.currentUser;
 var userSession = null;
 
+//this is to bring the gym info to confirm page
+function displayGym()
+{
+	let data = sessionStorage.getItem('selectedGym');
+	document.getElementById("gyminfo").innerHTML = data;
+	document.getElementById("gyminfo").innerHTML += ' - Capacity: ' + sessionStorage.getItem('capacity');
+}
+displayGym();
+
 auth.onAuthStateChanged((user) => {
 	if (user) {
 		// User is signed in, see docs for a list of available properties
@@ -34,10 +43,6 @@ function validateDate(date) {
 	return true;
 }
 
-//this is to bring the gym info to confirm page
-let data = sessionStorage.getItem('selectedGym');
-document.getElementById("gyminfo").innerHTML = data;
-document.getElementById("gyminfo").innerHTML += 'Capacity' + sessionStorage.getItem('capacity');
 
 document.getElementById("price").value = (12 * 1);
 document.getElementById("quantity").addEventListener("click", function (e) {
@@ -70,12 +75,17 @@ function createPurchase(transaction) {
 
 	var db = firebase.database();
 	var dbPurchases = db.ref('purchases');
-	
+	var gym = sessionStorage.getItem('selectedGym');
+	var quantity = document.getElementById("quantity").value;
+
 	var purchaseInfo = dbPurchases.push();
+
 	purchaseInfo.set({
 		status: transaction.status,
 		id: transaction.id,
-		user: userSession.uid
+		user: userSession.uid,
+		gym: gym,
+		quantity: quantity
 	});
 
 }
@@ -96,7 +106,7 @@ paypal.Buttons({
 		var capacity = sessionStorage.getItem('capacity');
 
 		if (capacity <= document.getElementById('quantity').value) {
-			event.preventDefault();
+			e.preventDefault();
 		}
 		//TODO validation here for date field & capacity
 	},
@@ -107,7 +117,7 @@ paypal.Buttons({
 			// Successful capture! For dev/demo purposes:
 			console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
 			const transaction = orderData.purchase_units[0].payments.captures[0];
-			console.log(transaction);
+			//console.log(transaction);
 			alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
 			// When ready to go live, remove the alert and show a success message within this page. For example:
 			// const element = document.getElementById('paypal-button-container');
@@ -115,7 +125,44 @@ paypal.Buttons({
 			// Or go to another URL:  actions.redirect('thank_you.html');
 			linkUserToGym();
 			createPurchase(transaction);
-			//TODO reduce capacity
+			subtractCapacity();
 		});
 	}
 }).render('#paypal-button-container');
+
+function subtractCapacity()
+{
+	var gym = sessionStorage.getItem('selectedGym');
+	var capacity = document.getElementById("quantity").value;
+
+	var usersRef = firebase.database().ref('gyms/');
+	//use "once" otherwise it goes into infinite loop
+	//when changing values inside the loop
+	//https://stackoverflow.com/questions/66895722/javascript-infinite-loop-when-updating-firebase-realtime-database
+
+	usersRef.once("value", function(snapshot)
+	{
+		snapshot.forEach(function (childSnapshot)
+		{
+			var childData = childSnapshot.val();
+
+			if(gym == childData.name)
+			{
+				var data = {
+					name: childData.name,
+					latitude: childData.latitude,
+					longitude: childData.longitude,
+					capacity: parseInt(childData.capacity) - parseInt(capacity)
+				}
+
+				var key = childSnapshot.key;
+				var updates = {}
+				updates['gyms/' + key] = data;
+				firebase.database().ref().update(updates);
+				sessionStorage.setItem('capacity', parseInt(childData.capacity) - parseInt(capacity));
+				displayGym();
+				return;
+			}
+		})
+	})
+}

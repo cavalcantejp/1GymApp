@@ -11,8 +11,14 @@ function listGymsforDropdown() {
 
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val();
+            // var capacityCounter = 0;
+            // if (capacityCounter == 0)
+            // {
+            //     sessionStorage.setItem('capacity', childData.capacity);
+            // }
+            // capacityCounter++;
+           
             gyms = gyms + ", " + childData.name;
-            sessionStorage.setItem('capacity', childData.capacity);
 
             //had to use parse to accept the number
             coordinates.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude) });
@@ -22,6 +28,8 @@ function listGymsforDropdown() {
 
         //event listener to change the capacity
         dropgym.addEventListener('change', function () {
+            if(this.value != "default")
+            {document.getElementById('nextButton').disabled = false}
             dbGyms.on("value", function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
                     var childData = childSnapshot.val();
