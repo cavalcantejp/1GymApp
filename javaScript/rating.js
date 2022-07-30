@@ -62,7 +62,13 @@ auth.onAuthStateChanged((user) => {
         {
             snapshot.forEach(function (childSnapshot)
             {
+                //loop to stop appearing multiple of the same gym
                 var childData = childSnapshot.val();
+                for(var i = 0; i<dropgym.options.length; i++)
+                {
+                    if(dropgym.options[i].value == childData.gym)
+                    return;
+                }
                 if (childData.user == uid)
                 {
                     dropgym.options[dropgym.options.length] = new Option(childData.gym, childData.gym);
