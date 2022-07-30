@@ -36,8 +36,15 @@ function validateDate(date) {
 	var parsedDate = new Date(date);
 	var today = new Date();
 
+	parsedDate.setHours(0,0,0,0);
+	//
+	today.setHours(0,0,0,0);
+
 	if (parsedDate < today) {
 		//TODO cant buy today pass
+		console.log();
+		
+
 		alert('Date must be today onwards');
 		return false;
 	}
@@ -132,7 +139,7 @@ paypal.Buttons({
 		//listen for changes to the checkbox
 		document.getElementById("date").addEventListener('change', function(event)
 		{
-			console.log(date);
+			//console.log(date);
 			//Enable or disable the button when it is checked or unchecked
 			if(validateDate(this.value))
 			{
