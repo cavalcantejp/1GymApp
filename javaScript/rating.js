@@ -87,7 +87,7 @@ document.getElementById("commentbutton").addEventListener("click", function () {
 
     var name = document.getElementById('name').value;
     var comment = document.getElementById('comment').value;
-    var comment = document.getElementById("drop-gym");
+    var dropgym = document.getElementById("drop-gym");
 
 
     firebase.database().ref('ratings/' + Date.now()).set({
