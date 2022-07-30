@@ -85,8 +85,11 @@
 }
 
 #nextButton:disabled{
-    color: #666666;
-    background-color: #404040;
-    /*TODO change color of the button when disabled*/
-    
+    color: white;
+    background-color: #404040 !important;
+}
+
+#nextButton:hover{
+    color: black;
+    background-color: #df0e0e !important;
 }

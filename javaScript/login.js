@@ -18,7 +18,7 @@ document.getElementById('formLogin').addEventListener('submit',(e) =>
     {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorMessage);
+        alert(errorMessage + " " + errorCode);
     });
 });
 
@@ -36,8 +36,8 @@ document.getElementById('formSignUp').addEventListener('submit',(e) =>
         alert("User successfully created.");
     }).catch(function(error)
     {
-        var errorcode = error.code;
-        var errormsg = error.msg;
-        alert(errormsg);
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        alert(errorMessage + " " + errorCode);
     });
 });
