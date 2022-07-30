@@ -28,7 +28,8 @@ auth.onAuthStateChanged((user) => {
 
 //to prevent buying before
 function validateDate(date) {
-	if (date == "" || date == null) {
+	//console.log(date);
+	if (date == null || date == "") {
 		alert('Please fill in the date');
 		return false;
 	}
@@ -36,6 +37,7 @@ function validateDate(date) {
 	var today = new Date();
 
 	if (parsedDate < today) {
+		//TODO cant buy today pass
 		alert('Date must be today onwards');
 		return false;
 	}
@@ -77,6 +79,7 @@ function createPurchase(transaction) {
 	var dbPurchases = db.ref('purchases');
 	var gym = sessionStorage.getItem('selectedGym');
 	var quantity = document.getElementById("quantity").value;
+	var date = document.getElementById("date").value;
 
 	var purchaseInfo = dbPurchases.push();
 
@@ -85,7 +88,8 @@ function createPurchase(transaction) {
 		id: transaction.id,
 		user: userSession.uid,
 		gym: gym,
-		quantity: quantity
+		quantity: quantity,
+		date: date
 	});
 
 }
@@ -102,13 +106,30 @@ paypal.Buttons({
 		});
 	},
 
-	onClick: (e) => {
-		var capacity = sessionStorage.getItem('capacity');
+	onInit: function(data, actions)
+	{
+		//disable the buttons
+		actions.disable();
 
-		if (capacity <= document.getElementById('quantity').value) {
-			e.preventDefault();
-		}
-		//TODO validation here for date field & capacity
+		var date = document.getElementById("date").value;
+		//listen for changes to the checkbox
+		document.getElementById("date").addEventListener('change', function(event)
+		{
+			console.log(date);
+			//Enable or disable the button when it is checked or unchecked
+			if(validateDate(this.value))
+			{
+				actions.enable();
+			}
+			else
+			{
+				actions.disable();
+			}
+		});
+	},
+
+	onClick: (e) => {
+		
 	},
 
 	// Finalize the transaction after payer approval
