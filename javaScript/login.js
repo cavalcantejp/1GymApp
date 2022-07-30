@@ -13,7 +13,7 @@ document.getElementById('formLogin').addEventListener('submit',(e) =>
     {
         const user = userCredential.user;
         alert("User successfully logged in.");
-        location.href = 'rating.html' 
+        location.href = 'userPage.html' 
     }).catch((error) => 
     {
         const errorCode = error.code;
