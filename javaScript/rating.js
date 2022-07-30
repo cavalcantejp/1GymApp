@@ -77,8 +77,8 @@ auth.onAuthStateChanged((user) => {
         });
 
     } else {
-        // User is signed out
-        // ...
+        //guest user not allowed on this page
+        location.href = "index.html";
     }
 });
 
