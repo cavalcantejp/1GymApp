@@ -61,11 +61,14 @@ function linkUserToGym() {
 			if (sessionStorage.getItem('selectedGym') == childData.name) {
 				var g = sessionStorage.getItem('selectedGym');
 
-				firebase.database().ref('users/' + userSession.uid).set({
-					username: userSession.uid,
-					email: userSession.email,
-					gym: g
-				});
+				if(userSession != null)
+				{
+					firebase.database().ref('users/' + userSession.uid).set({
+						username: userSession.uid,
+						email: userSession.email,
+						gym: g
+					});
+				}
 
 			}
 		});
@@ -83,14 +86,28 @@ function createPurchase(transaction) {
 
 	var purchaseInfo = dbPurchases.push();
 
-	purchaseInfo.set({
-		status: transaction.status,
-		id: transaction.id,
-		user: userSession.uid,
-		gym: gym,
-		quantity: quantity,
-		date: date
-	});
+	if(userSession == null)
+	{
+		purchaseInfo.set({
+			status: transaction.status,
+			id: transaction.id,
+			user: "",
+			gym: gym,
+			quantity: quantity,
+			date: date
+		});
+	}
+	else
+	{
+		purchaseInfo.set({
+			status: transaction.status,
+			id: transaction.id,
+			user: userSession.uid,
+			gym: gym,
+			quantity: quantity,
+			date: date
+		});
+	}
 
 }
 
