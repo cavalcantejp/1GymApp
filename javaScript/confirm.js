@@ -164,6 +164,19 @@ paypal.Buttons({
 			linkUserToGym();
 			createPurchase(transaction);
 			subtractCapacity();
+
+			//email didnt work.
+			// Email.send({
+			// 	Host : "smtp.elasticemail.com",
+			// 	Username : "x20231857@student.ncirl.ie",
+			// 	Password : "A62773013BD3DA811E59E2B1C32283E48E1C",
+			// 	To : 'joao.engine@hotmail.com',
+			// 	From : "x20231857@student.ncirl.ie",
+			// 	Subject : "This is the subject",
+			// 	Body : "Test"
+			// }).then(
+			//   message => alert(message)
+			// );
 		});
 	}
 }).render('#paypal-button-container');
