@@ -51,13 +51,18 @@ function listGyms()
         snapshot.forEach(function(childSnapshot) 
         {
             var childData = childSnapshot.val();
-            gyms = gyms + ", " + childData.name;
+            //gyms = gyms + ", " + childData.name;
+
+            var newGym = {}
+            newGym.title = childData.name; 
+            newGym.coordinates = {lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude)};
 
             //had to use parse to accept the number
-            coordinates.push({ lat: parseFloat(childData.latitude), lng: parseFloat(childData.longitude) });
+            coordinates.push(newGym);
+            console.log(coordinates);
         });
         //saves the elements in the variable
-        document.getElementById("list-gyms").innerHTML = gyms;
+        //document.getElementById("list-gyms").innerHTML = gyms;
 
         initMap(coordinates);
     });
@@ -69,15 +74,16 @@ function initMap(coordinates)
     const map = new google.maps.Map(document.getElementById("map"), 
     {
         zoom: 14,
-        center: coordinates[0],
+        center: coordinates[0].coordinates,
     });
 
     //for each to add the pins to the map
     coordinates.forEach(coordinate => 
     {
         new google.maps.Marker({
-            position: coordinate,
+            position: coordinate.coordinates,
             map: map,
+            title: coordinate.title
         });
     });
 }
