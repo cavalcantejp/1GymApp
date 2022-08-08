@@ -11,13 +11,7 @@ function listGymsforDropdown() {
 
         snapshot.forEach(function (childSnapshot) {
             var childData = childSnapshot.val();
-            // var capacityCounter = 0;
-            // if (capacityCounter == 0)
-            // {
-            //     sessionStorage.setItem('capacity', childData.capacity);
-            // }
-            // capacityCounter++;
-           
+    
             gyms = gyms + ", " + childData.name;
 
             //had to use parse to accept the number

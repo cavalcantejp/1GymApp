@@ -37,13 +37,10 @@ function validateDate(date) {
 	var today = new Date();
 
 	parsedDate.setHours(0,0,0,0);
-	//
+
 	today.setHours(0,0,0,0);
 
 	if (parsedDate < today) {
-		//TODO cant buy today pass
-		console.log();
-		
 
 		alert('Date must be today onwards');
 		return false;
@@ -52,6 +49,17 @@ function validateDate(date) {
 	return true;
 }
 
+Date.prototype.addDays = function (days) {
+	let date = new Date(this.valueOf());
+	date.setDate(date.getDate() + days);
+	return date;
+  }
+
+function getCalculatedExpiredDate(date, quantity)
+{
+	var parsedDate = new Date(date);
+	return parsedDate.addDays(Number(quantity));
+}
 
 document.getElementById("price").value = (12 * 1);
 document.getElementById("quantity").addEventListener("click", function (e) {
@@ -83,38 +91,36 @@ function linkUserToGym() {
 }
 
 // create purchase
-function createPurchase(transaction) {
+async function createPurchase(transaction) {
 
 	var db = firebase.database();
 	var dbPurchases = db.ref('purchases');
 	var gym = sessionStorage.getItem('selectedGym');
 	var quantity = document.getElementById("quantity").value;
-	var date = document.getElementById("date").value;
-
+	var date = new Date(document.getElementById("date").value);
+	var parsedDate = new Date(date);
 	var purchaseInfo = dbPurchases.push();
+	var dateNow = new Date();
 
-	if(userSession == null)
-	{
-		purchaseInfo.set({
-			status: transaction.status,
-			id: transaction.id,
-			user: "",
-			gym: gym,
-			quantity: quantity,
-			date: date
-		});
-	}
-	else
-	{
-		purchaseInfo.set({
-			status: transaction.status,
-			id: transaction.id,
-			user: userSession.uid,
-			gym: gym,
-			quantity: quantity,
-			date: date
-		});
-	}
+	var test = await purchaseInfo.set({
+		status: transaction.status,
+		id: transaction.id,
+		user: userSession == null ? "" : userSession.uid,
+		gym: gym,
+		quantity: quantity,
+		purchasedate: dateNow.toDateString(),
+		date: parsedDate.toDateString(),
+		expiredate: getCalculatedExpiredDate(date, quantity).toDateString()
+	});
+
+	var aaa = test;
+}
+
+function generateQrCode(transaction){
+
+	// todo: store url in environment variable
+	var url = "file:///C:/Users/joaoe/code/1GymApp/pass-validator.html?transaction_id=" + transaction.uid;
+	var qrc = new QRCode(document.getElementById("qrcode"), url);
 
 }
 
@@ -139,11 +145,12 @@ paypal.Buttons({
 		//listen for changes to the checkbox
 		document.getElementById("date").addEventListener('change', function(event)
 		{
-			//console.log(date);
 			//Enable or disable the button when it is checked or unchecked
 			if(validateDate(this.value))
 			{
 				actions.enable();
+				console.log(date);
+				console.log(quantity);
 			}
 			else
 			{
@@ -163,27 +170,16 @@ paypal.Buttons({
 			console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
 			const transaction = orderData.purchase_units[0].payments.captures[0];
 			//console.log(transaction);
-			alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+			alert(`Transaction ${transaction.status}: ${transaction.id}\n\nThank you for your payment`);
 			// When ready to go live, remove the alert and show a success message within this page. For example:
 			// const element = document.getElementById('paypal-button-container');
 			// element.innerHTML = '<h3>Thank you for your payment!</h3>';
 			// Or go to another URL:  actions.redirect('thank_you.html');
 			linkUserToGym();
 			createPurchase(transaction);
+			generateQrCode(transaction);
 			subtractCapacity();
 
-			//email didnt work.
-			// Email.send({
-			// 	Host : "smtp.elasticemail.com",
-			// 	Username : "x20231857@student.ncirl.ie",
-			// 	Password : "A62773013BD3DA811E59E2B1C32283E48E1C",
-			// 	To : 'joao.engine@hotmail.com',
-			// 	From : "x20231857@student.ncirl.ie",
-			// 	Subject : "This is the subject",
-			// 	Body : "Test"
-			// }).then(
-			//   message => alert(message)
-			// );
 		});
 	}
 }).render('#paypal-button-container');
@@ -192,10 +188,8 @@ function subtractCapacity()
 {
 	var gym = sessionStorage.getItem('selectedGym');
 	var capacity = document.getElementById("quantity").value;
-
 	var usersRef = firebase.database().ref('gyms/');
-	//use "once" otherwise it goes into infinite loop
-	//when changing values inside the loop
+	//use "once" otherwise it goes into infinite loop when changing values inside the loop
 	//https://stackoverflow.com/questions/66895722/javascript-infinite-loop-when-updating-firebase-realtime-database
 
 	usersRef.once("value", function(snapshot)

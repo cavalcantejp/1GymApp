@@ -49,8 +49,6 @@ auth.onAuthStateChanged((user) => {
         usersRef.on("value", function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
                 var childData = childSnapshot.val();
-
-                //document.getElementById('gymname').innerHTML = "Gym: " + childData.gym;
                 gymname = childData.gym;
             });
         });

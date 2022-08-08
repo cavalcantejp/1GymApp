@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <div id="qrcode"></div>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -22,6 +23,9 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active logo-1gymapp" aria-current="page" href="index.html">1GymApp</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="userPage.html">My Page</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav me-2">
@@ -36,7 +40,8 @@
     <main>
         <aside id="gyminfo">Insert gym info here</aside>
         <article>
-            <form name="formConfirm" id="formConfirm" action="" onsubmit="">
+            <form name="formConfirm" id="formConfirm" action="https://formspree.io/f/mknewvzb" onsubmit="" method="POST">
+                <input type="hidden" id="conform" name="conform" value="">
                 <div class="div-confirm">
                     <div><label for="date">Select date</label></div>
                     <div><input type="date" name="date" id="date"
@@ -45,17 +50,16 @@
                     <div><input type="text" id="price" readonly></label></div>
                 </div>
                 <div>
-                    <div><label for="quantity">Select quantity</label></div>
+                    <div><label for="quantity">Select quantity of passes</label></div>
                     <select name="quantity" id="quantity">
                         <option value="1">1</option>
                         <option value="3">3</option>
                         <option value="5">5</option>
-                        <option value="10">10</option>
                     </select>
                 </div>
             </form>
         </article>
-        <div id="paypal-button-container"></div>
+        <div id="paypal-button-container" name="paypal-button-container"></div>
     </main>
     <footer>
         <p id="copyright">Copyright &copy; of JP Inc </p>
@@ -67,9 +71,8 @@
     <script src="javaScript/server.js"></script>
     <script src="javaScript/userManager.js"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=Aeh5DFX4OTtt1nigq-axrjq9cWKviTcey0z_3hFhoElBwmpAABGhndOnkfvfuRmeO7Xp1c4VyE10TJSe&currency=EUR"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="javaScript/confirm.js"></script>
-    <!--script src="https://smtpjs.com/v3/smtp.js"></script NOT WORKING-->
-    
 </body>
 
 </html>

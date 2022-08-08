@@ -21,16 +21,18 @@ auth.onAuthStateChanged((user) => {
                 if(user.uid == childData.user)
                 {
                     var p = document.createElement('p');
-                    p.innerHTML = "Pass Number: " + childData.id + " Gym: " + childData.gym + " Qty: " + childData.quantity + " User id: " + childData.user;
-
+                    p.innerHTML = "Pass Number: " + childData.id + " Gym: " + childData.gym + " Qty: " + childData.quantity + "User id: " + childData.user;
                     purchases.appendChild(p);
-                    console.log("test");
                 }
             });
+
+            if (purchases.innerHTML == ""){
+                purchases.innerHTML = "No purchases to display.";
+            }
         });
 	}
 	else 
     {
-		// TODOUser is signed out
+		alert("user signed out");
 	}
 });
