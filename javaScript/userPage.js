@@ -33,6 +33,6 @@ auth.onAuthStateChanged((user) => {
 	}
 	else 
     {
-		alert("user signed out");
+		location.href = "index.html";
 	}
 });
