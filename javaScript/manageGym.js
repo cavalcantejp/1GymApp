@@ -6,12 +6,14 @@ const auth = firebase.auth();
 
 const user = auth.currentUser;
 var uid = "";
+var userSession = null;
 
 auth.onAuthStateChanged((user) => {
 	if (user) {
 		// User is signed in, see docs for a list of available properties
 		// https://firebase.google.com/docs/reference/js/firebase.User
 		uid = user;
+        userSession = user;
 	}
 	else {
 		// TODOUser is signed out
@@ -21,23 +23,32 @@ auth.onAuthStateChanged((user) => {
 // create gym
 document.getElementById('formGym').addEventListener('submit',(e) => 
 {
-    if(uid.uid != admin)
-    {
-        alert("You are not an admin");
-    }
-    else
-    {
-        //use the push function to add a new gym into the database, set holds the values, like an object
-        var gymInfo = dbGyms.push();
+
+    var gymInfo = dbGyms.push();
         gymInfo.set({
             name: document.getElementById('name').value,
             capacity: document.getElementById('capacity').value,
             latitude: document.getElementById('latitude').value,
             longitude: document.getElementById('longitude').value
         });
-    }
 
-    e.preventDefault();
+    // if(uid.uid != admin)
+    // {
+    //     alert("You are not an admin");
+    // }
+    // else
+    // {
+    //     //use the push function to add a new gym into the database, set holds the values, like an object
+    //     var gymInfo = dbGyms.push();
+    //     gymInfo.set({
+    //         name: document.getElementById('name').value,
+    //         capacity: document.getElementById('capacity').value,
+    //         latitude: document.getElementById('latitude').value,
+    //         longitude: document.getElementById('longitude').value
+    //     });
+    // }
+
+    // e.preventDefault();
 
 });
 
@@ -90,7 +101,7 @@ function initMap(coordinates)
 
 listGyms();
 
-var usersRef = firebase.database().ref('Admin/');
+var usersRef = firebase.database().ref('Admin');
 
 usersRef.on("value", function (snapshot) 
 {
