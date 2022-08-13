@@ -113,7 +113,6 @@ async function createPurchase(transaction) {
 		expiredate: getCalculatedExpiredDate(date, quantity).toDateString()
 	});
 
-	var aaa = test;
 }
 
 function generateQrCode(transaction){

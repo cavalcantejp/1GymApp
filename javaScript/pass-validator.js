@@ -1,5 +1,4 @@
 (function (){
-
 	//import {getDatabase, ref, get, set, child, update, remove}
 	//from 'https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js';
 
